@@ -26,7 +26,7 @@ export const signin = async (req, res, next) => {
       const isValidPassword = bcryptjs.compareSync(password, validUser.password);
       if (!isValidPassword) return next(errorHandler(401, "Wrong Credentials"));
 
-      const token = jwt.sign({ userId: validUser._id }, process.env.JWT_SECRET);
+      const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
       const { password: hashedPassword, ...rest } = validUser._doc;
 
       const expiryDate = new Date(Date.now() + 3600000); // 1 hour expiration
