@@ -65,4 +65,9 @@ res.cookie("my_token", token, { httpOnly: true, expires: expiryDate }).status(20
    }catch(error){
       next(error);
    }
-}
+};
+
+
+export const signout = (req, res) => {
+   res.clearCookie("my_token").status(200).json('Signout success!');
+};
