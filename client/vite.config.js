@@ -6,11 +6,13 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/backend':
-      {
+      '/backend': {
         target: 'http://localhost:3000',
         secure: false,
       },
     },
+  },
+  build: {
+    outDir: 'build', // Specify the output directory as 'build'
   },
 });
