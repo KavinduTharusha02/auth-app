@@ -1,11 +1,12 @@
 import express from 'express';
-import { signin, signup, google,signout } from '../controllers/auth.controller.js';
+import { signup, signin, google, signout, verifyOtp } from '../controllers/auth.controller.js';
 
 const router = express.Router();
 
-router.post("/signup",signup);
-router.post("/signin",signin);
-router.post('/google', google);
-router.get('/signout, signout');
+router.post('/signup', signup);      // Route to handle user signup and send OTP
+router.post('/signin', signin);      // Route to handle user login
+router.post('/google', google);      // Route for Google sign-in
+router.post('/verify-Otp', verifyOtp); // Route to verify OTP
+router.get('/signout', signout);     // Route to handle user signout
 
 export default router;
