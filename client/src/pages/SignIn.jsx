@@ -3,6 +3,7 @@ import { useState } from "react";
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 import { useDispatch, useSelector } from "react-redux";
 import OAuth from "../components/OAuth";
+import { useEffect } from "react";
 
 function SignIn() {
   const [formData, setFormData] = useState({ email: '', password: '' }); // Initialize with empty fields
@@ -14,6 +15,11 @@ function SignIn() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
+
+  useEffect(() => {
+    // Reset error state when component mounts
+    dispatch(signInFailure(null));
+  }, [dispatch]);
 
   // Function to validate form inputs
   const validate = () => {

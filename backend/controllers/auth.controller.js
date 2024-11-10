@@ -40,6 +40,8 @@ export const signup = async (req, res, next) => {
 
     
     const otpEntry = new OTP({
+      username,
+      hashedPassword,
       email,
       code: otpCode,
       expiresAt: Date.now() + 10 * 60 * 1000, 
@@ -84,9 +86,9 @@ export const verifyOtp = async (req, res, next) => {
 
    
     const newUser = new User({
-      username,
+      username: otpEntry.username,
       email,
-      password: bcryptjs.hashSync(req.body.password, 10), 
+      password: otpEntry.hashedPassword, 
     });
 
     await newUser.save();

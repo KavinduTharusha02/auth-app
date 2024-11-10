@@ -23,7 +23,7 @@ function VerifyOTP() {
     setLoading(true);
 
     try {
-      const res = await fetch('/backend/auth/verify-Otp', { 
+      const res = await fetch('/backend/auth/verifyOtp', { 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp }),
