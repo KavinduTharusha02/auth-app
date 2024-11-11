@@ -72,35 +72,37 @@ export const verifyOtp = async (req, res, next) => {
   const { email, otp } = req.body;
 
   try {
-   
+    // Find the OTP entry by email and OTP code
     const otpEntry = await OTP.findOne({ email, code: otp });
 
+    // Check if OTP entry exists
     if (!otpEntry) {
       return res.status(400).json({ success: false, message: 'Invalid OTP' });
     }
 
-    
+    // Check if OTP is expired
     if (otpEntry.expiresAt < Date.now()) {
       return res.status(400).json({ success: false, message: 'OTP has expired. Please request a new one.' });
     }
 
-   
+    // Create new user based on OTP entry data
     const newUser = new User({
       username: otpEntry.username,
       email,
-      password: otpEntry.hashedPassword, 
+      password: otpEntry.hashedPassword,
     });
 
     await newUser.save();
 
-   
-    await OTP.deleteOne({ email });
+    // Delete the OTP entry by its ID after successful verification
+    await OTP.deleteOne({ _id: otpEntry._id });
 
     res.status(200).json({ success: true, message: 'OTP verified. Account created successfully.' });
   } catch (error) {
     next(error);
   }
 };
+
 
 
 export const signin = async (req, res, next) => {
