@@ -10,7 +10,7 @@ export const test = (req, res) => {
 // Fetch all users
 export const getAllUsers = async (req, res, next) => {
     try {
-        const users = await User.find(); // Retrieve all users from the database
+        const users = await User.find();
         res.status(200).json(users);
     } catch (error) {
         return next(errorHandler(500, "Unable to fetch users!"));
@@ -41,7 +41,7 @@ export const updateUser = async (req, res, next) => {
         const { password, ...rest } = updatedUser._doc;
         res.status(200).json(rest);
 
-        // Uncomment if activity logger is implemented
+       
         // await logUserActivity(updatedUser._id, updatedUser.username, 'Updated Profile');
     } catch (error) {
         return next(errorHandler(500, "Error updating user!"));
@@ -60,3 +60,4 @@ export const deleteUser = async (req, res, next) => {
         return next(errorHandler(500, "Error deleting user!"));
     }
 };
+

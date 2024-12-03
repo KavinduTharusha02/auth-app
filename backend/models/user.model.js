@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-image-gray-blank-silhouette-vector-illustration-305503988.jpg",
     },
-},{timestamp: true});
+},{timestamps: true});
 
 const User = mongoose.model('User', userSchema);
 
