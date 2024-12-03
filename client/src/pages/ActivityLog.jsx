@@ -22,7 +22,7 @@ const ActivityLog = () => {
     // Fetch activity log from the API
     const fetchActivityLog = async () => {
       try {
-        const response = await fetch('https://auth-app-one-rho.vercel.app/backend/admin/activity-log');
+        const response = await fetch('/backend/admin/activity-log');
         if (!response.ok) {
           throw new Error('Failed to fetch activity log');
         }
