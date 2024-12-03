@@ -1,12 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { signInStart, signInSuccess, signInFailure } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
-import { useEffect } from "react";
+import Header from "../components/Header";
 
 function SignIn() {
-  const [formData, setFormData] = useState({ email: '', password: '' }); // Initialize with empty fields
+  const [formData, setFormData] = useState({ email: "", password: "" }); // Initialize with empty fields
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -46,10 +46,10 @@ function SignIn() {
     try {
       dispatch(signInStart());
 
-      const res = await fetch('/backend/auth/signin', {
-        method: 'POST',
+      const res = await fetch("/backend/auth/signin", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -60,48 +60,62 @@ function SignIn() {
         return;
       }
 
+      // Handle routing based on email and password
+      if (
+        formData.email === "kavindutharusha02@gmail.com" &&
+        formData.password === "@1234Ab"
+      ) {
+        navigate("/activity-log"); // Navigate to /activity-log for specific credentials
+      } else {
+        navigate("/"); // Navigate to / for other credentials
+      }
+
       dispatch(signInSuccess(data)); // Dispatch success on successful response
-      navigate('/'); // Redirect to home on successful sign-in
     } catch (error) {
       dispatch(signInFailure({ message: "Something went wrong!" })); // Dispatch error on API failure
     }
   };
 
   return (
-    <div className='p-3 max-w-lg mx-auto'>
-      <h1 className='text-3xl text-center font-bold my-7'>Sign In</h1>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-        <input
-          type="email"
-          placeholder='Email'
-          id='email'
-          className='bg-slate-100 p-3 rounded-lg'
-          onChange={handleChange}
-          value={formData.email} // Controlled input
-        />
-        <input
-          type="password"
-          placeholder='Password'
-          id='password'
-          className='bg-slate-100 p-3 rounded-lg'
-          onChange={handleChange}
-          value={formData.password} // Controlled input
-        />
-        <button
-          disabled={loading}
-          className='bg-slate-800 text-white p-3 rounded-lg uppercase hover:opacity-90 disabled:opacity-60'
-        >
-          {loading ? 'Loading...' : 'Sign In'}
-        </button>
-        <OAuth />
-      </form>
-      <div className='flex gap-2 mt-5 justify-center items-center'>
-        <p className='text-gray-500 font-semibold'>Don't have an account?</p>
-        <Link to='/sign-up'>
-          <span className='text-gray-700 font-semibold'>Sign Up</span>
-        </Link>
+    <div>
+      <Header />
+      <div className="p-3 max-w-lg mx-auto">
+        <h1 className="text-3xl text-center font-bold my-7">Sign In</h1>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <input
+            type="email"
+            placeholder="Email"
+            id="email"
+            className="bg-slate-100 p-3 rounded-lg"
+            onChange={handleChange}
+            value={formData.email} // Controlled input
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            id="password"
+            className="bg-slate-100 p-3 rounded-lg"
+            onChange={handleChange}
+            value={formData.password} // Controlled input
+          />
+          <button
+            disabled={loading}
+            className="bg-slate-800 text-white p-3 rounded-lg uppercase hover:opacity-90 disabled:opacity-60"
+          >
+            {loading ? "Loading..." : "Sign In"}
+          </button>
+          <OAuth />
+        </form>
+        <div className="flex gap-2 mt-5 justify-center items-center">
+          <p className="text-gray-500 font-semibold">Don't have an account?</p>
+          <Link to="/sign-up">
+            <span className="text-gray-700 font-semibold">Sign Up</span>
+          </Link>
+        </div>
+        <p className="text-red-700 mt-5">
+          {error ? error.message || "Something Went Wrong!" : ""}
+        </p> {/* Display error message */}
       </div>
-      <p className="text-red-700 mt-5">{error ? error.message || "Something Went Wrong!" : ''}</p> {/* Display error message */}
     </div>
   );
 }

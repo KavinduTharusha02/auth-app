@@ -6,8 +6,9 @@ import { updateUserStart, updateUserSuccess, updateUserFailure,
          deleteUserStart, deleteUserSuccess, deleteUserFailure,
         signOut } from "../redux/user/userSlice";
 
-import Header from "../components/Header";
-function Profile() {
+
+import NavBar from "../components/NavBar";
+function Adminprofile() {
   const dispatch = useDispatch();
   const fileRef = useRef(null);
   const { currentUser, loading,error } = useSelector((state) => state.user);
@@ -68,7 +69,7 @@ function Profile() {
   }
   return (
     <div>
-      <Header />
+      <NavBar />
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-bold text-center my-7">Profile</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -117,4 +118,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Adminprofile;

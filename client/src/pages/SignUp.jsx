@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import OAuth from "../components/OAuth";
 import VerifyOTP from "../components/VerifyOTP";
-
+import Header from "../components/Header";
 
 function SignUp() {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
@@ -86,6 +86,8 @@ function SignUp() {
   
 
   return (
+    <div>
+      <Header />
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl text-center font-bold my-7">Sign Up</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -128,6 +130,7 @@ function SignUp() {
         </Link>
       </div>
       <p className="text-red-700 mt-5">{error && error}</p> {}
+    </div>
     </div>
   );
 }

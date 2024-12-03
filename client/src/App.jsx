@@ -4,15 +4,16 @@ import About from "./pages/About"
 import SignIn from "./pages/SignIn"
 import SignUp from "./pages/SignUp"
 import Profile from "./pages/Profile"
-import Header from "./components/Header"
+import Adminprofile from "./pages/Adminprofile"
 import PrivateRoute from "./components/PrivateRoute"
 import VerifyOTP from "./components/VerifyOTP";
+import ActivityLog from "./pages/ActivityLog";
 
 function App() {
   return (
     <BrowserRouter>
     {/* Header */}
-    <Header />
+    
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
@@ -21,6 +22,8 @@ function App() {
       <Route path="/verify-otp" element={<VerifyOTP />} /> {/* OTP Verification Route */}
       <Route element={<PrivateRoute />} >
       <Route path="/profile" element={<Profile />} />
+      <Route path="/activity-log" element={<ActivityLog />} />
+      <Route path="/adminprofile" element={<Adminprofile />} />
       </Route>
      </Routes>
     </BrowserRouter>

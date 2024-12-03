@@ -1,7 +1,9 @@
 import React from 'react'
-
+import Header from '../components/Header'
 export default function Home() {
   return (
+    <div>
+      <Header />
     <div className='px-4 py-12 max-w-2xl mx-auto'>
      <h1 className='text-3xl font-bold mb-4 text-slate-700 text-center'>This is Login Wrapper</h1>
      <p className='mb-4 text-slate-600 text-center'>
@@ -17,6 +19,7 @@ export default function Home() {
      <p className='mb-4 text-slate-600 text-center'>
       this application intended as starting point for building full stack web application with authentication using MERN-stack.
      </p>
+    </div>
     </div>
   )
 }

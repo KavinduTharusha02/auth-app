@@ -5,11 +5,11 @@ import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 import dotenv from 'dotenv';
-
-
+import OTP from '../models/otp.model.js'; 
+//import { logUserActivity } from '../utils/activityLogger.js';
 dotenv.config();
 
-import OTP from '../models/otp.model.js'; // OTP model to store OTP codes temporarily
+
 import { log } from 'console';
 
 // Nodemailer configuration for sending OTP email
@@ -96,6 +96,7 @@ export const verifyOtp = async (req, res, next) => {
 
     // Delete the OTP entry by its ID after successful verification
     await OTP.deleteOne({ _id: otpEntry._id });
+    //await logUserActivity(newUser._id, newUser.username, 'Account Created');
 
     res.status(200).json({ success: true, message: 'OTP verified. Account created successfully.' });
   } catch (error) {
@@ -160,3 +161,4 @@ export const google = async (req, res, next) => {
 export const signout = (req, res) => {
   res.clearCookie("my_token").status(200).json('Signout success!');
 };
+
