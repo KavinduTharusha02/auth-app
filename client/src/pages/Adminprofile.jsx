@@ -61,7 +61,7 @@ function Adminprofile() {
 
   const handleSignOut = async () => {
     try{
-      await fetch('backend/user/signout');
+      await fetch('https://auth-app-one-rho.vercel.app/backend/user/signout');
       dispatch(signOut());
     }catch(error){
      console.log(error);
