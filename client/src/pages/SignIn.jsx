@@ -46,7 +46,7 @@ function SignIn() {
     try {
       dispatch(signInStart());
 
-      const res = await fetch("/backend/auth/signin", {
+      const res = await fetch("https://auth-app-one-rho.vercel.app/backend/auth/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
